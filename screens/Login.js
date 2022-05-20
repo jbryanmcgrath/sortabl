@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View } from 'react-native'
 import {
     StyledContainer,
@@ -9,17 +9,20 @@ import {
     StyledFormArea,
     LeftIcon,
     RightIcon,
-    StyledButton, StyledInputLabel, StyledTextInput
+    StyledButton, StyledInputLabel, StyledTextInput, ButtonText
 
 } from './../components/styles'
 import { StatusBar } from 'expo-status-bar'
 import { Formik } from 'formik';
-import { Octicons } from '@expo/vector-icons'
+import { Octicons, Ionicons } from '@expo/vector-icons'
 import { Colors } from './../components/styles';
 
 
 
 const Login = () => {
+    const [hidePassword, setHidePassword] = useState(true);
+
+
     return (
         <StyledContainer>
             <StatusBar style="dark" />
@@ -53,9 +56,16 @@ const Login = () => {
                             onChangeText={handleChange('password')}
                             onBlur={handleChange('password')}
                             value={values.password}
-                            secureTextEntry={true}
+                            secureTextEntry={hidePassword}
+                            isPassword={true}
+                            hidePassword={hidePassword}
+                            setHidePassword={setHidePassword}
                         />
-
+                        <StyledButton>
+                            <ButtonText>
+                                Login
+                            </ButtonText>
+                        </StyledButton>
                     </StyledFormArea>)}
                 </Formik>
             </InnerContainer>
@@ -64,7 +74,7 @@ const Login = () => {
 }
 
 
-const MyTextInput = ({ label, icon, ...props }) => {
+const MyTextInput = ({ label, icon, isPassword, hidePassword, setHidePassword, ...props }) => {
     return (
         <View>
             <LeftIcon>
@@ -72,6 +82,13 @@ const MyTextInput = ({ label, icon, ...props }) => {
             </LeftIcon>
             <StyledInputLabel>{label}</StyledInputLabel>
             <StyledTextInput {...props} />
+            {isPassword && (
+                <RightIcon onPress={() => {
+                    setHidePassword(!hidePassword)
+                }}>
+                    <Ionicons name={hidePassword ? 'md-eye-off' : 'md-eye'} size={30} color="black" />
+                </RightIcon>
+            )}
         </View>
     )
 }
