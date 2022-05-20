@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { View, Text, Image, TouchableOpacity } from 'react-native'
 import Constants from "expo-constants";
 
 const StatusBarHeight = Constants.statusBarHeight;
@@ -14,21 +13,22 @@ export const Colors = {
 
 const { primary, secondary, tertiary, highlight } = Colors;
 
+
 export const StyledContainer = styled.View`
-    flex: 1;
-    padding: 25px;
-    padding-top: ${StatusBarHeight + 10}px;
-    background-color: ${primary};
+  width: 100%;
+
+
 `
 export const InnerContainer = styled.View`
-    flex:1;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin: 0 auto;
     align-items: center;
 `
 
 export const PageLogo = styled.Image`
-    width: 500px;
-    height: 300px;
+    width:100vw;
 `
 
 export const PageTitle = styled.Text`
@@ -50,7 +50,7 @@ export const StyledFormArea = styled.View`
 `
 
 export const StyledTextInput = styled.TextInput`
-    background-color: ${secondary};
+    background-color: white;
     padding: 15px;
     padding-left: 55px;
     border-radius: 5px;
@@ -58,6 +58,7 @@ export const StyledTextInput = styled.TextInput`
     height: 60px;
     margin-bottom: 10px;
     color: ${tertiary};
+    border:2px solid lightgray
 `
 export const StyledInputLabel = styled.Text`
     color: ${tertiary};
@@ -90,9 +91,19 @@ export const StyledButton = styled.TouchableOpacity`
 
 export const ButtonText = styled.Text`
     color: black;
-    font-size: 16px;
+    font-size: 24px;
     `
-
+export const ButtonBoxInitial = styled.View`
+    width: 50%;
+    margin: auto 0;
+`
+export const InitialContainer = styled.View`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+`
 export const MessageBox = styled.Text`
     text-align: center;
     font-size: 13px;

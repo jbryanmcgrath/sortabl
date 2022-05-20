@@ -70,6 +70,7 @@ const Login = () => {
                         </StyledButton>
                         <Line />
                         <StyledButton>
+
                             <ButtonText>
                                 <Fontisto name="google" />
                                 Sign In With Google
