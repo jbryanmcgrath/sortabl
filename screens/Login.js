@@ -9,12 +9,12 @@ import {
     StyledFormArea,
     LeftIcon,
     RightIcon,
-    StyledButton, StyledInputLabel, StyledTextInput, ButtonText
+    StyledButton, StyledInputLabel, StyledTextInput, ButtonText, MessageBox, Line
 
 } from './../components/styles'
 import { StatusBar } from 'expo-status-bar'
 import { Formik } from 'formik';
-import { Octicons, Ionicons } from '@expo/vector-icons'
+import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons'
 import { Colors } from './../components/styles';
 
 
@@ -61,9 +61,18 @@ const Login = () => {
                             hidePassword={hidePassword}
                             setHidePassword={setHidePassword}
                         />
+                        <MessageBox>...
+                        </MessageBox>
                         <StyledButton>
                             <ButtonText>
                                 Login
+                            </ButtonText>
+                        </StyledButton>
+                        <Line />
+                        <StyledButton>
+                            <ButtonText>
+                                <Fontisto name="google" />
+                                Sign In With Google
                             </ButtonText>
                         </StyledButton>
                     </StyledFormArea>)}

@@ -92,3 +92,13 @@ export const ButtonText = styled.Text`
     color: black;
     font-size: 16px;
     `
+
+export const MessageBox = styled.Text`
+    text-align: center;
+    font-size: 13px;
+`
+export const Line = styled.View`
+    height: 1px;
+    background-color:lightgrey;
+    margin-top:10px;
+`
