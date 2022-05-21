@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { StyleSheet } from "react-native";
+
 import {
   InitialContainer,
   PageLogo,
@@ -11,7 +12,6 @@ import {
   LogoContainer,
   StyledContainer,
 } from "../components/style/style-components";
-
 
 const InitialScreen = ({ navigation }) => {
   return (
@@ -30,15 +30,21 @@ const InitialScreen = ({ navigation }) => {
               navigation.navigate("Login");
             }}
           >
-            <ButtonText>Login</ButtonText>
+            <ButtonText style={styles.font}>Login</ButtonText>
           </StyledButton>
           <StyledButton>
-            <ButtonText>Sign Up</ButtonText>
+            <ButtonText style={styles.font}>Sign Up</ButtonText>
           </StyledButton>
         </ButtonBox>
       </InitialContainer>
     </StyledContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  font: {
+    fontFamily: "comfortaa-regular",
+  },
+});
 
 export default InitialScreen;

@@ -39,7 +39,7 @@ export const LogoContainer = styled.View`
 `;
 export const LoginLogoContainer = styled.View`
   width: 100%;
-  margin: 50px 0;
+  margin: 60px 0;
 `;
 
 export const PageTitle = styled.Text`
@@ -47,6 +47,7 @@ export const PageTitle = styled.Text`
   text-align: center;
   font-weight: bold;
   color: ${tertiary};
+  padding: 10px 0;
 `;
 export const Subtitle = styled.Text`
   font-size: 18px;
@@ -57,7 +58,7 @@ export const Subtitle = styled.Text`
   color: ${tertiary};
 `;
 export const StyledFormArea = styled.View`
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
 `;
 
@@ -70,7 +71,6 @@ export const StyledTextInput = styled.TextInput`
   margin-bottom: 10px;
   color: ${tertiary};
   border: 2px solid lightgray;
-
 `;
 export const StyledInputLabel = styled.Text`
   color: ${tertiary};
@@ -80,13 +80,13 @@ export const StyledInputLabel = styled.Text`
 
 export const LeftIcon = styled.View`
   left: 15px;
-  top: 30px;
+  top: 25px;
   position: absolute;
   z-index: 1;
 `;
 export const RightIcon = styled.TouchableOpacity`
   right: 15px;
-  top: 30px;
+  top: 25px;
   position: absolute;
   z-index: 1;
 `;
@@ -105,6 +105,7 @@ export const ButtonText = styled.Text`
   color: white;
   font-size: 24px;
 `;
+
 export const ButtonBox = styled.View`
   width: 50%;
   margin: 0 auto;

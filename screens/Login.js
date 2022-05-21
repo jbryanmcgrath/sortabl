@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, TouchableWithoutFeedback, Keyboard } from "react-native";
+import {
+  View,
+  TouchableWithoutFeedback,
+  Keyboard,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import {
   StyledContainer,
   InnerContainer,
@@ -27,65 +34,71 @@ const Login = () => {
   const [hidePassword, setHidePassword] = useState(true);
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <StyledContainer>
-        <StatusBar style="dark" />
-        <InnerContainer>
-          <LoginLogoContainer>
-            <PageLogo
-              resizeMode="contain"
-              source={require("./../assets/images/LoginIcon.png")}
-            />
-          </LoginLogoContainer>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <StyledContainer>
+          <StatusBar style="dark" />
+          <InnerContainer>
+            <LoginLogoContainer>
+              <PageLogo
+                resizeMode="contain"
+                source={require("./../assets/images/LoginIcon.png")}
+              />
+            </LoginLogoContainer>
 
-          <PageTitle>Login</PageTitle>
+            <PageTitle style={styles.fontBold}>Login</PageTitle>
 
-          <LoginFormContainer>
-            <Formik
-              initialValues={{ email: "", password: "" }}
-              onSubmit={(values) => {
-                console.log(values);
-              }}
-            >
-              {({ handleChange, handleBlur, handleSubmit, values }) => (
-                <StyledFormArea>
-                  <MyTextInput
-                    label="Email Address"
-                    icon="mail"
-                    placeholder="Email"
-                    placeholderTextColor="black"
-                    onChangeText={handleChange("email")}
-                    onBlur={handleChange("email")}
-                    value={values.email}
-                    keyboardType="email-address"
-                  />
-                  <MyTextInput
-                    label="Password"
-                    icon="lock"
-                    textContentType="password"
-                    placeholder="*****"
-                    placeholderTextColor="black"
-                    onChangeText={handleChange("password")}
-                    onBlur={handleChange("password")}
-                    value={values.password}
-                    secureTextEntry={hidePassword}
-                    isPassword={true}
-                    hidePassword={hidePassword}
-                    setHidePassword={setHidePassword}
-                  />
-                  <MessageBox></MessageBox>
-                  <ButtonBox>
-                    <StyledButton>
-                      <ButtonText>Login</ButtonText>
-                    </StyledButton>
-                  </ButtonBox>
-                </StyledFormArea>
-              )}
-            </Formik>
-          </LoginFormContainer>
-        </InnerContainer>
-      </StyledContainer>
-    </TouchableWithoutFeedback>
+            <LoginFormContainer>
+              <Formik
+                initialValues={{ email: "", password: "" }}
+                onSubmit={(values) => {
+                  console.log(values);
+                }}
+              >
+                {({ handleChange, handleBlur, handleSubmit, values }) => (
+                  <StyledFormArea>
+                    <MyTextInput
+                      label="Email Address"
+                      icon="mail"
+                      placeholder="Email"
+                      placeholderTextColor="black"
+                      onChangeText={handleChange("email")}
+                      onBlur={handleChange("email")}
+                      value={values.email}
+                      keyboardType="email-address"
+                      style={styles.font}
+                    />
+                    <MyTextInput
+                      label="Password"
+                      icon="lock"
+                      textContentType="password"
+                      placeholder="*****"
+                      placeholderTextColor="black"
+                      onChangeText={handleChange("password")}
+                      onBlur={handleChange("password")}
+                      value={values.password}
+                      secureTextEntry={hidePassword}
+                      isPassword={true}
+                      hidePassword={hidePassword}
+                      setHidePassword={setHidePassword}
+                      style={styles.font}
+                    />
+                    <MessageBox></MessageBox>
+                    <ButtonBox>
+                      <StyledButton>
+                        <ButtonText style={styles.font}>Login</ButtonText>
+                      </StyledButton>
+                    </ButtonBox>
+                  </StyledFormArea>
+                )}
+              </Formik>
+            </LoginFormContainer>
+          </InnerContainer>
+        </StyledContainer>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -97,25 +110,25 @@ const MyTextInput = ({
   setHidePassword,
   ...props
 }) => {
-    const [bgColor, setBgColor] = useState("lightgray");
-    const onFocus = () => {
-        setBgColor("#59c1c6");
-    }
+  const [bgColor, setBgColor] = useState("lightgray");
+  const onFocus = () => {
+    setBgColor("#59c1c6");
+  };
 
-    const onBlur = () => {
-        setBgColor("lightgray");
-    }
+  const onBlur = () => {
+    setBgColor("lightgray");
+  };
   return (
     <View>
       <LeftIcon>
         <Octicons name={icon} size={30} color="black" />
       </LeftIcon>
-      <StyledInputLabel>{label}</StyledInputLabel>
+      <StyledInputLabel style={styles.font}>{label}</StyledInputLabel>
       <StyledTextInput
         {...props}
-        onFocus={()=> onFocus()}
+        onFocus={() => onFocus()}
         onBlur={() => onBlur()}
-        style={{ borderColor: bgColor}}
+        style={{ borderColor: bgColor, fontFamily: "comfortaa-regular" }}
       />
       {isPassword && (
         <RightIcon
@@ -133,4 +146,13 @@ const MyTextInput = ({
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  font: {
+    fontFamily: "comfortaa-regular",
+  },
+  fontBold: {
+    fontFamily: "comfortaa-bold",
+  },
+});
 export default Login;
