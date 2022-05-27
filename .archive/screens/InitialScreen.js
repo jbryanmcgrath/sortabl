@@ -11,7 +11,7 @@ import {
   ButtonBox,
   LogoContainer,
   StyledContainer,
-} from "../components/style/style-components";
+} from "../../components/style/style-components";
 
 const InitialScreen = ({ navigation }) => {
   return (
