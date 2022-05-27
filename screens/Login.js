@@ -1,105 +1,156 @@
-import React, { useState } from 'react'
-import { View } from 'react-native'
+import React, { useState } from "react";
 import {
-    StyledContainer,
-    InnerContainer,
-    PageLogo,
-    PageTitle,
-    Subtitle,
-    StyledFormArea,
-    LeftIcon,
-    RightIcon,
-    StyledButton, StyledInputLabel, StyledTextInput, ButtonText, MessageBox, Line
-
-} from './../components/styles'
-import { StatusBar } from 'expo-status-bar'
-import { Formik } from 'formik';
-import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons'
-import { Colors } from './../components/styles';
-
-
+  View,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableOpacity,
+} from "react-native";
+import {
+  StyledContainer,
+  InnerContainer,
+  PageLogo,
+  PageTitle,
+  Subtitle,
+  LoginLogoContainer,
+  StyledFormArea,
+  LeftIcon,
+  RightIcon,
+  StyledButton,
+  StyledInputLabel,
+  StyledTextInput,
+  ButtonText,
+  MessageBox,
+  Line,
+  LoginFormContainer,
+  ButtonBox,
+} from "../components/style/style-components.js";
+import { StatusBar } from "expo-status-bar";
+import { Formik } from "formik";
+import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
+import { styles } from "../styles/index.js";
 
 const Login = () => {
-    const [hidePassword, setHidePassword] = useState(true);
+  const [hidePassword, setHidePassword] = useState(true);
 
-
-    return (
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <StyledContainer>
-            <StatusBar style="dark" />
-            <InnerContainer>
-                <PageLogo resizeMode="cover" source={require('./../assets/images/LoginIcon.png')} />
-                <PageTitle>A CRM FOR 🤟 </PageTitle>
-                <Subtitle>Account Login</Subtitle>
+          <StatusBar style="dark" />
+          <InnerContainer>
+            <LoginLogoContainer>
+              <PageLogo
+                resizeMode="contain"
+                source={require("./../assets/images/LoginIcon.png")}
+              />
+            </LoginLogoContainer>
 
-                <Formik
-                    initialValues={{ email: '', password: '' }}
-                    onSubmit={(values) => {
-                        console.log(values)
-                    }}>
-                    {({ handleChange, handleBlur, handleSubmit, values }) => (<StyledFormArea>
+            <PageTitle style={styles.fontBold}>Login</PageTitle>
 
-                        <MyTextInput
-                            label="Email Address"
-                            icon='mail'
-                            placeholder='Email'
-                            placeholderTextColor='black'
-                            onChangeText={handleChange('email')}
-                            onBlur={handleChange('email')}
-                            value={values.email}
-                            keyboardType="email-address"
-                        />
-                        <MyTextInput
-                            label="Password"
-                            icon='lock'
-                            placeholder='*****'
-                            placeholderTextColor='black'
-                            onChangeText={handleChange('password')}
-                            onBlur={handleChange('password')}
-                            value={values.password}
-                            secureTextEntry={hidePassword}
-                            isPassword={true}
-                            hidePassword={hidePassword}
-                            setHidePassword={setHidePassword}
-                        />
-                        <MessageBox>...
-                        </MessageBox>
-                        <StyledButton>
-                            <ButtonText>
-                                Login
-                            </ButtonText>
-                        </StyledButton>
-                        <Line />
-                        <StyledButton>
-
-                            <ButtonText>
-                                <Fontisto name="google" />
-                                Sign In With Google
-                            </ButtonText>
-                        </StyledButton>
-                    </StyledFormArea>)}
-                </Formik>
-            </InnerContainer>
+            <LoginFormContainer>
+              <Formik
+                initialValues={{ email: "", password: "" }}
+                onSubmit={(values) => {
+                  console.log(values);
+                }}
+              >
+                {({ handleChange, handleBlur, handleSubmit, values }) => (
+                  <StyledFormArea>
+                    <MyTextInput
+                      label="Email Address"
+                      icon="mail"
+                      placeholder="Email"
+                      placeholderTextColor="black"
+                      onChangeText={handleChange("email")}
+                      onBlur={handleChange("email")}
+                      value={values.email}
+                      keyboardType="email-address"
+                      style={styles.font}
+                    />
+                    <MyTextInput
+                      label="Password"
+                      icon="lock"
+                      textContentType="password"
+                      placeholder="*****"
+                      placeholderTextColor="black"
+                      onChangeText={handleChange("password")}
+                      onBlur={handleChange("password")}
+                      value={values.password}
+                      secureTextEntry={hidePassword}
+                      isPassword={true}
+                      hidePassword={hidePassword}
+                      setHidePassword={setHidePassword}
+                      style={styles.font}
+                    />
+                    <MessageBox></MessageBox>
+                    <ButtonBox>
+                      <StyledButton>
+                        <ButtonText style={styles.font}>Login</ButtonText>
+                      </StyledButton>
+                    </ButtonBox>
+                  </StyledFormArea>
+                )}
+              </Formik>
+            </LoginFormContainer>
+            <TouchableOpacity style={styles.createAccountLinkWrapper}>
+              <ButtonText style={[styles.font, styles.createAccountLink]}>
+                Create Account
+              </ButtonText>
+            </TouchableOpacity>
+          </InnerContainer>
         </StyledContainer>
-    )
-}
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
+  );
+};
 
+const MyTextInput = ({
+  label,
+  icon,
+  isPassword,
+  hidePassword,
+  setHidePassword,
+  ...props
+}) => {
+  const [bgColor, setBgColor] = useState("lightgray");
+  const onFocus = () => {
+    setBgColor("#59c1c6");
+  };
 
-const MyTextInput = ({ label, icon, isPassword, hidePassword, setHidePassword, ...props }) => {
-    return (
-        <View>
-            <LeftIcon>
-                <Octicons name={icon} size={30} color="black" />
-            </LeftIcon>
-            <StyledInputLabel>{label}</StyledInputLabel>
-            <StyledTextInput {...props} />
-            {isPassword && (
-                <RightIcon onPress={() => {
-                    setHidePassword(!hidePassword)
-                }}>
-                    <Ionicons name={hidePassword ? 'md-eye-off' : 'md-eye'} size={30} color="black" />
-                </RightIcon>
-            )}
-        </View>
-    )
-}
-export default Login
+  const onBlur = () => {
+    setBgColor("lightgray");
+  };
+  return (
+    <View>
+      <LeftIcon>
+        <Octicons name={icon} size={30} color="black" />
+      </LeftIcon>
+      <StyledInputLabel style={styles.font}>{label}</StyledInputLabel>
+      <StyledTextInput
+        {...props}
+        onFocus={() => onFocus()}
+        onBlur={() => onBlur()}
+        style={{ borderColor: bgColor, fontFamily: "comfortaa-regular" }}
+      />
+      {isPassword && (
+        <RightIcon
+          onPress={() => {
+            setHidePassword(!hidePassword);
+          }}
+        >
+          <Ionicons
+            name={hidePassword ? "md-eye-off" : "md-eye"}
+            size={30}
+            color="black"
+          />
+        </RightIcon>
+      )}
+    </View>
+  );
+};
+
+export default Login;
