@@ -3,9 +3,9 @@ import {
   View,
   TouchableWithoutFeedback,
   Keyboard,
-  StyleSheet,
   KeyboardAvoidingView,
   Platform,
+  TouchableOpacity,
 } from "react-native";
 import {
   StyledContainer,
@@ -29,6 +29,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { Formik } from "formik";
 import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
+import { styles } from "../styles/index.js";
 
 const Login = () => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -95,6 +96,11 @@ const Login = () => {
                 )}
               </Formik>
             </LoginFormContainer>
+            <TouchableOpacity style={styles.createAccountLinkWrapper}>
+              <ButtonText style={[styles.font, styles.createAccountLink]}>
+                Create Account
+              </ButtonText>
+            </TouchableOpacity>
           </InnerContainer>
         </StyledContainer>
       </TouchableWithoutFeedback>
@@ -147,12 +153,4 @@ const MyTextInput = ({
   );
 };
 
-const styles = StyleSheet.create({
-  font: {
-    fontFamily: "comfortaa-regular",
-  },
-  fontBold: {
-    fontFamily: "comfortaa-bold",
-  },
-});
 export default Login;
