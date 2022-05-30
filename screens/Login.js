@@ -33,6 +33,12 @@ import { styles } from "../styles/index.js";
 
 const Login = () => {
   const [hidePassword, setHidePassword] = useState(true);
+  const [login, setLogin] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLogin({ ...login, [name]: value });
+  };
 
   return (
     <KeyboardAvoidingView
@@ -58,42 +64,42 @@ const Login = () => {
                   console.log(values);
                 }}
               >
-                {({ handleChange, handleBlur, handleSubmit, values }) => (
-                  <StyledFormArea>
-                    <MyTextInput
-                      label="Email Address"
-                      icon="mail"
-                      placeholder="Email"
-                      placeholderTextColor="black"
-                      onChangeText={handleChange("email")}
-                      onBlur={handleChange("email")}
-                      value={values.email}
-                      keyboardType="email-address"
-                      style={styles.font}
-                    />
-                    <MyTextInput
-                      label="Password"
-                      icon="lock"
-                      textContentType="password"
-                      placeholder="*****"
-                      placeholderTextColor="black"
-                      onChangeText={handleChange("password")}
-                      onBlur={handleChange("password")}
-                      value={values.password}
-                      secureTextEntry={hidePassword}
-                      isPassword={true}
-                      hidePassword={hidePassword}
-                      setHidePassword={setHidePassword}
-                      style={styles.font}
-                    />
-                    <MessageBox></MessageBox>
-                    <ButtonBox>
-                      <StyledButton>
-                        <ButtonText style={styles.font}>Login</ButtonText>
-                      </StyledButton>
-                    </ButtonBox>
-                  </StyledFormArea>
-                )}
+                <StyledFormArea>
+                  <MyTextInput
+                    name="email"
+                    label="Email Address"
+                    icon="mail"
+                    placeholder="Email"
+                    placeholderTextColor="black"
+                    onChangeText={handleChange}
+                    onBlur={handleChange}
+                    value={values.email}
+                    keyboardType="email-address"
+                    style={styles.font}
+                  />
+                  <MyTextInput
+                    name="password"
+                    label="Password"
+                    icon="lock"
+                    textContentType="password"
+                    placeholder="*****"
+                    placeholderTextColor="black"
+                    onChangeText={handleChange}
+                    onBlur={handleChange}
+                    value={values.password}
+                    secureTextEntry={hidePassword}
+                    isPassword={true}
+                    hidePassword={hidePassword}
+                    setHidePassword={setHidePassword}
+                    style={styles.font}
+                  />
+                  <MessageBox></MessageBox>
+                  <ButtonBox>
+                    <StyledButton>
+                      <ButtonText style={styles.font}>Login</ButtonText>
+                    </StyledButton>
+                  </ButtonBox>
+                </StyledFormArea>
               </Formik>
             </LoginFormContainer>
             <TouchableOpacity style={styles.createAccountLinkWrapper}>
